@@ -11,6 +11,8 @@
 
 [py-kms](https://github.com/SystemRage/py-kms) is a port of node-kms created by cyrozap, which is a port of either the C#, C++, or .NET implementations of KMS Emulator. The original version was written by CODYQX4 and is derived from the reverse-engineered code of Microsoft's official KMS.
 
+Update: Proper builds are now available [here](https://github.com/Py-KMS-Organization/py-kms).
+
 These are builds of the Minimal image, with Server 2022 support until the offical docker builds are working again.
 
 ## Versions
