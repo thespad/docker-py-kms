@@ -1,0 +1,42 @@
+#!/usr/bin/with-contenv bash
+
+#Export envs for s6 to use
+if [[ -z $PORT ]]; then
+    printf "1688" > /var/run/s6/container_environment/PORT
+fi
+
+if [[ -z $LCID ]]; then
+    printf "1033" > /var/run/s6/container_environment/LCID
+fi
+
+if [[ -z $CLIENT_COUNT ]]; then
+    printf "26" > /var/run/s6/container_environment/CLIENT_COUNT
+fi
+
+if [[ -z $ACTIVATION_INTERVAL ]]; then
+    printf "120" > /var/run/s6/container_environment/ACTIVATION_INTERVAL
+fi
+
+if [[ -z $RENEWAL_INTERVAL ]]; then
+    printf "10080" > /var/run/s6/container_environment/RENEWAL_INTERVAL
+fi
+
+if [[ -z $HWID ]]; then
+    printf "RANDOM" > /var/run/s6/container_environment/HWID
+fi
+
+if [[ -z $LOGLEVEL ]]; then
+    printf "INFO" > /var/run/s6/container_environment/LOGLEVEL
+fi
+
+if [[ -z $LOGFILE ]]; then
+    printf "/config/pykms_logserver.log" > /var/run/s6/container_environment/LOGFILE
+fi
+
+#Remove unnecessary entrypoint processes
+sed -i 's|^  change_tz()|  #change_tz()|g' /usr/bin/entrypoint.py
+sed -i 's|subprocess.call(PYTHON3 + " -u /usr/bin/start.py", preexec_fn=change_uid_grp(), shell=True)|subprocess.call(PYTHON3 + " -u /usr/bin/start.py", shell=True)|g' /usr/bin/entrypoint.py
+
+# permissions
+chown -R abc:abc \
+    /config

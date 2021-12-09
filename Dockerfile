@@ -1,16 +1,5 @@
-FROM alpine:3.14
-
-ENV IP		0.0.0.0
-ENV PORT		1688
-ENV EPID		""
-ENV LCID		1033
-ENV CLIENT_COUNT	26
-ENV ACTIVATION_INTERVAL	120
-ENV RENEWAL_INTERVAL	10080
-ENV HWID		"RANDOM"
-ENV LOGLEVEL	INFO
-ENV LOGFILE		/var/log/pykms_logserver.log
-ENV LOGSIZE		""
+FROM ghcr.io/linuxserver/baseimage-alpine:3.15
+LABEL maintainer="Adam Beardwood"
 
 RUN \
   apk add --update --no-cache --virtual=build-dependencies \
@@ -28,17 +17,19 @@ RUN \
     sqlite-libs \
     py3-pip && \
   pip3 install peewee tzlocal && \
-  git clone https://github.com/SystemRage/py-kms/ /tmp/py-kms && \
+  git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
+  mv /tmp/py-kms/docker/*.py /usr/bin && \
+  chmod 755 /usr/bin/entrypoint.py && \
   apk del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/*
 
-COPY /pykms_Base.py /home/py-kms
+COPY root/ /
 
 WORKDIR /home/py-kms
 
-EXPOSE ${PORT}/tcp
+EXPOSE 1688/tcp
 
-ENTRYPOINT /usr/bin/python3 pykms_Server.py ${IP} ${PORT} -l ${LCID} -c ${CLIENT_COUNT} -a ${ACTIVATION_INTERVAL} -r ${RENEWAL_INTERVAL} -w ${HWID} -V ${LOGLEVEL} -F ${LOGFILE}
+VOLUME /config

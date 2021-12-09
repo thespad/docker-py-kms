@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+cd "$CWD" || exit
+exec \
+    s6-setuidgid abc /usr/bin/python3 -u /usr/bin/entrypoint.py
