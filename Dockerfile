@@ -16,7 +16,7 @@ RUN \
     python3-tkinter \
     sqlite-libs \
     py3-pip && \
-  pip3 install peewee tzlocal && \
+  pip3 install -U --no-cache-dir peewee tzlocal && \
   git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
   apk del --purge \
