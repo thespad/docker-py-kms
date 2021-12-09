@@ -9,12 +9,11 @@
 [![License](https://img.shields.io/github/license/thespad/docker-py-kms?color=94398d&logo=Github&logoColor=ffffff&style=for-the-badge)](#)
 [![Commits](https://img.shields.io/github/commits-since/thespad/docker-py-kms/latest?color=94398d&include_prereleases&logo=github&style=for-the-badge)](#)
 
-[py-kms](https://github.com/SystemRage/py-kms) is a port of node-kms created by cyrozap, which is a port of either the C#, C++, or .NET implementations of KMS Emulator. The original version was written by CODYQX4 and is derived from the reverse-engineered code of Microsoft's official KMS.
+[py-kms](https://github.com/Py-KMS-Organization/py-kms) is a port of node-kms created by cyrozap, which is a port of either the C#, C++, or .NET implementations of KMS Emulator. The original version was written by CODYQX4 and is derived from the reverse-engineered code of Microsoft's official KMS. This version of py-kms is itself a fork of the original implementation by SystemRage, which was abandoned early 2021.
 
-Update: Proper builds are now available [here](https://github.com/Py-KMS-Organization/py-kms).
-
-These are builds of the Minimal image, with Server 2022 support until the offical docker builds are working again.
+These are my own builds of the Minimal image using the [LSIO base](https://github.com/linuxserver/docker-baseimage-alpine) and s6 because the upstream project keeps accepting PRs for the entrypoint scripts that change their behaviour in ways that break the container.
 
 ## Versions
 
+* **09.12.21:** - New container build from LSIO Alpine 3.15 base.
 * **01.09.21:** - Initial Release.
