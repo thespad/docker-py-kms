@@ -2,4 +2,4 @@
 
 cd "$CWD" || exit
 exec \
-    s6-setuidgid abc /usr/bin/python3 -u /usr/bin/entrypoint.py
+    s6-setuidgid abc /usr/bin/python3 pykms_Server.py "0.0.0.0" "${PORT}" -l "${LCID}" -c "${CLIENT_COUNT}" -a "${ACTIVATION_INTERVAL}" -r "${RENEWAL_INTERVAL}" -w "${HWID}" -V "${LOGLEVEL}" -F "${LOGFILE}"

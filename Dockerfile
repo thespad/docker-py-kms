@@ -19,8 +19,6 @@ RUN \
   pip3 install peewee tzlocal && \
   git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
-  mv /tmp/py-kms/docker/*.py /usr/bin && \
-  chmod 755 /usr/bin/entrypoint.py && \
   apk del --purge \
     build-dependencies && \
   rm -rf \
