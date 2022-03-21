@@ -7,10 +7,11 @@ on:
 
 jobs:
   call-workflow:
-    uses: thespad/actions/.github/workflows/ci.yml@v4
+    uses: thespad/actions/.github/workflows/check-and-release.yml@v5
     with:
       repo_owner: ${{ github.repository_owner }}
       app_name: "py-kms"
-      release_type: "script"
+      release_type: "github_commit"
+      release_url: "https://api.github.com/repos/Py-KMS-Organization/py-kms"
     secrets:
       repo_scoped_token: ${{ secrets.repo_scoped_token }}
