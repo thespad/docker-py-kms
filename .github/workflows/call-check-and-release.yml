@@ -12,6 +12,6 @@ jobs:
       repo_owner: ${{ github.repository_owner }}
       app_name: "py-kms"
       release_type: "github_commit"
-      release_url: "https://api.github.com/repos/Py-KMS-Organization/py-kms"
+      release_url: "https://api.github.com/repos/Py-KMS-Organization/py-kms/commits/master"
     secrets:
       repo_scoped_token: ${{ secrets.repo_scoped_token }}
