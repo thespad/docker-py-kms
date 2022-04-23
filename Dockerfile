@@ -18,7 +18,7 @@ RUN \
     sqlite-libs \
     py3-pip && \
   pip3 install --no-cache-dir -U pip && \
-  pip3 install --no-cache-dir -U peewee tzlocal && \
+  pip3 install --no-cache-dir -U peewee tzlocal dnspython && \
   git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
   apk del --purge \
