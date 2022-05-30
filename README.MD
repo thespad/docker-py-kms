@@ -9,7 +9,7 @@
 
 [![ci](https://img.shields.io/github/workflow/status/thespad/docker-py-kms/Check%20for%20update%20and%20release.svg?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Upstream%20Updates)](https://github.com/thespad/docker-py-kms/actions/workflows/call-check-and-release.yml)
 [![ci](https://img.shields.io/github/workflow/status/thespad/docker-py-kms/Check%20for%20base%20image%20updates.svg?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Baseimage%20Updates)](https://github.com/thespad/docker-py-kms/actions/workflows/call-baseimage-update.yml)
-[![ci](https://img.shields.io/github/workflow/status/thespad/docker-py-kms/Build%20Image%20On%20Release.svg?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-py-kms/actions/workflows/called-build-image.yml)
+[![ci](https://img.shields.io/github/workflow/status/thespad/docker-py-kms/Build%20Image%20On%20Release.svg?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-py-kms/actions/workflows/call-build-image.yml)
 
 [py-kms](https://github.com/Py-KMS-Organization/py-kms) is a port of node-kms created by cyrozap, which is a port of either the C#, C++, or .NET implementations of KMS Emulator. The original version was written by CODYQX4 and is derived from the reverse-engineered code of Microsoft's official KMS. This version of py-kms is itself a fork of the original implementation by SystemRage, which was abandoned early 2021.
 
@@ -17,9 +17,9 @@ These are my own builds of the Minimal image using the [LSIO base](https://githu
 
 ## Supported Architectures
 
-Our images support multiple architectures such as `x86-64`, `arm64` and `armhf`.
+Our images support multiple architectures.
 
-Simply pulling `ghcr.io/thespad/py-kms` should retrieve the correct image for your arch.
+Simply pulling `ghcr.io/thespad/py-kms:latest` should retrieve the correct image for your arch.
 
 The architectures supported by this image are:
 
@@ -28,6 +28,86 @@ The architectures supported by this image are:
 | x86-64 | ✅ | latest |
 | arm64 | ✅ | latest |
 | armhf | ✅ | latest |
+
+## Application Setup
+
+Webui is accessible at `http://SERVERIP:PORT`
+
+More info at [py-kms](https://github.com/Py-KMS-Organization/py-kms).
+
+## Usage
+
+Here are some example snippets to help you get started creating a container.
+
+### docker-compose ([recommended](https://docs.linuxserver.io/general/docker-compose))
+
+Compatible with docker-compose v2 schemas.
+
+```yaml
+---
+version: "2.1"
+services:
+  py-kms:
+    image: ghcr.io/thespad/py-kms:latest
+    container_name: py-kms
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/appdata/config:/config
+    ports:
+      - 1688:1688
+    restart: unless-stopped
+```
+
+### docker cli
+
+```shell
+docker run -d \
+  --name=py-kms \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/London \
+  -p 1688:1688 \
+  -v /path/to/appdata/config:/config \
+  --restart unless-stopped \
+  ghcr.io/thespad/py-kms:latest
+```
+
+## Parameters
+
+Container images are configured using parameters passed at runtime (such as those above). These parameters are separated by a colon and indicate `<external>:<internal>` respectively. For example, `-p 8080:80` would expose port `80` from inside the container to be accessible from the host's IP on port `8080` outside the container.
+
+| Parameter | Function |
+| :----: | --- |
+| `-p 1688` | Web GUI |
+| `-e PUID=1000` | for UserID - see below for explanation |
+| `-e PGID=1000` | for GroupID - see below for explanation |
+| `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
+| `-v /config` | Contains all relevant configuration files. |
+
+## User / Group Identifiers
+
+When using volumes (`-v` flags) permissions issues can arise between the host OS and the container, we avoid this issue by allowing you to specify the user `PUID` and group `PGID`.
+
+Ensure any volume directories on the host are owned by the same user you specify and any permissions issues will vanish like magic.
+
+In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as below:
+
+```shell
+  $ id username
+    uid=1000(dockeruser) gid=1000(dockergroup) groups=1000(dockergroup)
+```
+
+## Support Info
+
+* Shell access whilst the container is running: `docker exec -it py-kms /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f py-kms`
+
+### Image Update Notifications - Diun (Docker Image Update Notifier)
+
+* We recommend [Diun](https://crazymax.dev/diun/) for update notifications. Other tools that automatically update containers unattended are not recommended or supported.
 
 ## Versions
 
