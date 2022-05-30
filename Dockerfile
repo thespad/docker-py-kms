@@ -1,5 +1,11 @@
 FROM ghcr.io/linuxserver/baseimage-alpine:3.15
-LABEL maintainer="Adam Beardwood"
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+ARG APP_VERSION
+LABEL build_version="Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thespad"
 LABEL org.opencontainers.image.source="https://github.com/TheSpad/docker-py-kms"
 
 RUN \
@@ -11,16 +17,16 @@ RUN \
     python3-dev && \
   apk add --no-cache --update \
     bash \
-    py3-argparse \
-    py3-flask \
-    py3-pygments \
+    ca-certificates \
+    python3 \
     python3-tkinter \
-    sqlite-libs \
-    py3-pip && \
-  pip3 install --no-cache-dir -U pip && \
-  pip3 install --no-cache-dir -U peewee tzlocal dnspython && \
+    py3-pip \
+    tzdata && \
   git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
+  mv /tmp/py-kms/docker/requirements_minimal.txt /home/py-kms && \
+  pip3 install --no-cache-dir -U pip && \
+  pip3 install --no-cache-dir -U -r /home/py-kms/requirements_minimal.txt && \
   apk del --purge \
     build-dependencies && \
   rm -rf \
