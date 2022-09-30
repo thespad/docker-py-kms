@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-#Export envs for s6 to use
+#Export envs for py-kms to use
 if [[ -z $PORT ]]; then
     printf "1688" > /var/run/s6/container_environment/PORT
 fi
