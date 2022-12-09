@@ -1,4 +1,6 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.16
+# syntax=docker/dockerfile:1
+
+FROM ghcr.io/linuxserver/baseimage-alpine:3.17
 
 # set version label
 ARG BUILD_DATE
@@ -10,24 +12,22 @@ LABEL org.opencontainers.image.source="https://github.com/thespad/docker-py-kms"
 LABEL org.opencontainers.image.url="https://github.com/thespad/docker-py-kms"
 
 RUN \
-  apk add --update --no-cache --virtual=build-dependencies \
+  apk add --no-cache --update --virtual=build-dependencies \
     git \
     gcc \
     musl-dev \
-    py3-wheel \
     python3-dev && \
   apk add --no-cache --update \
-    bash \
-    ca-certificates \
     python3 \
-    python3-tkinter \
-    py3-pip \
-    tzdata && \
+    python3-tkinter && \
   git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
   mv /tmp/py-kms/docker/requirements_minimal.txt /home/py-kms && \
-  pip3 install --no-cache-dir -U pip && \
-  pip3 install --no-cache-dir -U -r /home/py-kms/requirements_minimal.txt && \
+  python3 -m ensurepip && \
+  pip3 install -U --no-cache-dir \
+    pip \
+    wheel && \
+  pip3 install -U --no-cache-dir -r /home/py-kms/requirements_minimal.txt && \
   apk del --purge \
     build-dependencies && \
   rm -rf \
