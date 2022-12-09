@@ -18,8 +18,7 @@ RUN \
     musl-dev \
     python3-dev && \
   apk add --no-cache --update \
-    python3 \
-    python3-tkinter && \
+    python3 && \
   git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
   mv /tmp/py-kms/docker/requirements_minimal.txt /home/py-kms && \
