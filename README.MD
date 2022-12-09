@@ -111,6 +111,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 
 ## Versions
 
+* **09.12.22:** - Rebase to Alpine 3.17.
 * **24.09.22:** - Rebase to Alpine 3.16, migrate to s6v3.
 * **09.12.21:** - New container build from LSIO Alpine 3.15 base.
 * **01.09.21:** - Initial Release.
