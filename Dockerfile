@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 FROM ghcr.io/linuxserver/baseimage-alpine:3.17
 
 # set version label
@@ -10,7 +12,7 @@ LABEL org.opencontainers.image.source="https://github.com/thespad/docker-py-kms"
 LABEL org.opencontainers.image.url="https://github.com/thespad/docker-py-kms"
 
 RUN \
-  apk add --update --no-cache --virtual=build-dependencies \
+  apk add --no-cache --update --virtual=build-dependencies \
     git \
     gcc \
     musl-dev \
