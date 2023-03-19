@@ -13,9 +13,8 @@ LABEL org.opencontainers.image.url="https://github.com/thespad/docker-py-kms"
 
 RUN \
   apk add --no-cache --update --virtual=build-dependencies \
+    build-base \
     git \
-    gcc \
-    musl-dev \
     python3-dev && \
   apk add --no-cache --update \
     python3 && \
@@ -25,7 +24,9 @@ RUN \
   python3 -m ensurepip && \
   pip3 install -U --no-cache-dir \
     pip \
+    setuptools \
     wheel && \
+  pip3 install -U --no-cache-dir pytz && \
   pip3 install -U --no-cache-dir -r /home/py-kms/requirements_minimal.txt && \
   apk del --purge \
     build-dependencies && \
