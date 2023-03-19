@@ -24,6 +24,7 @@ RUN \
   python3 -m ensurepip && \
   pip3 install -U --no-cache-dir \
     pip \
+    setuptools \
     wheel && \
   pip3 install -U --no-cache-dir pytz && \
   pip3 install -U --no-cache-dir -r /home/py-kms/requirements_minimal.txt && \
