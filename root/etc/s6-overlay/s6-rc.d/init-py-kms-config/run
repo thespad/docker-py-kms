@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bash
+# shellcheck shell=bash
 
-#Export envs for py-kms to use
+#Export default envs for py-kms to use
 if [[ -z $PORT ]]; then
     printf "1688" > /var/run/s6/container_environment/PORT
 fi
