@@ -20,14 +20,14 @@ RUN \
     python3 && \
   git clone https://github.com/Py-KMS-Organization/py-kms/ /tmp/py-kms && \
   mv /tmp/py-kms/py-kms /home/ && \
-  mv /tmp/py-kms/docker/requirements_minimal.txt /home/py-kms && \
+  mv /tmp/py-kms/docker/docker-py3-kms-minimal/requirements.txt /home/py-kms && \
   python3 -m ensurepip && \
   pip3 install -U --no-cache-dir \
     pip \
     setuptools \
     wheel && \
   pip3 install -U --no-cache-dir pytz && \
-  pip3 install -U --no-cache-dir -r /home/py-kms/requirements_minimal.txt && \
+  pip3 install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.17 -r /home/py-kms/requirements.txt && \
   apk del --purge \
     build-dependencies && \
   rm -rf \

@@ -7,11 +7,13 @@ on:
 
 jobs:
   call-workflow:
-    uses: thespad/actions/.github/workflows/check-and-release.yml@v6
+    uses: thespad/actions/.github/workflows/check-and-release.yml@v7
     with:
       repo_owner: "thespad"
       app_name: "py-kms"
       release_type: "github_commit"
       release_url: "https://api.github.com/repos/Py-KMS-Organization/py-kms/commits/master"
+      dockerhub_user: "thespad"
     secrets:
       repo_scoped_token: ${{ secrets.repo_scoped_token }}
+      dockerhub_password: ${{ secrets.docker_password }}
