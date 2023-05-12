@@ -27,7 +27,7 @@ The architectures supported by this image are:
 | :----: | :----: | ---- |
 | x86-64 | ✅ | latest |
 | arm64 | ✅ | latest |
-| armhf | ✅ | latest |
+| armhf | ❌ | latest |
 
 ## Application Setup
 
@@ -111,6 +111,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 
 ## Versions
 
+* **14.05.23:** - Rebase to Alpine 3.18. Drop support for armhf.
 * **19.03.23:** - Add `pytz`.
 * **09.12.22:** - Rebase to Alpine 3.17.
 * **24.09.22:** - Rebase to Alpine 3.16, migrate to s6v3.
