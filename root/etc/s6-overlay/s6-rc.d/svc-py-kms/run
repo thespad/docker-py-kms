@@ -3,4 +3,4 @@
 
 exec \
     s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost ${PORT}" \
-        cd /home/py-kms s6-setuidgid abc /usr/bin/python3 -u pykms_Server.py "0.0.0.0" "${PORT}" -l "${LCID}" -c "${CLIENT_COUNT}" -a "${ACTIVATION_INTERVAL}" -r "${RENEWAL_INTERVAL}" -w "${HWID}" -V "${LOGLEVEL}" -F "${LOGFILE}"
+        cd /home/py-kms s6-setuidgid abc python3 -u pykms_Server.py "::" "${PORT}" -l "${LCID}" -c "${CLIENT_COUNT}" -a "${ACTIVATION_INTERVAL}" -r "${RENEWAL_INTERVAL}" -w "${HWID}" -V "${LOGLEVEL}" -F "${LOGFILE}"
