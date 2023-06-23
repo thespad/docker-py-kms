@@ -31,8 +31,6 @@ The architectures supported by this image are:
 
 ## Application Setup
 
-Webui is accessible at `http://SERVERIP:PORT`
-
 More info at [py-kms](https://github.com/Py-KMS-Organization/py-kms).
 
 ## Usage
