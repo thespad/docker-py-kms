@@ -52,6 +52,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
+      - LEGACY_NET= #optional
     volumes:
       - /path/to/appdata/config:/config
     ports:
@@ -66,6 +67,7 @@ docker run -d \
   --name=py-kms \
   -e PUID=1000 \
   -e PGID=1000 \
+  -e LEGACY_NET= `#optional` \
   -e TZ=Europe/London \
   -p 1688:1688 \
   -v /path/to/appdata/config:/config \
@@ -83,6 +85,7 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
+| `-e LEGACY_NET=` | Set to `true` if you have an ancient host that can't support IPv6 dual stack. This will force py-kms to only bind to the IPv4 interface inside the container. |
 | `-v /config` | Contains all relevant configuration files. |
 
 ## User / Group Identifiers
@@ -109,6 +112,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 
 ## Versions
 
+* **29.10.23:** - Provide IPv4-only option for legacy hosts.
 * **14.05.23:** - Rebase to Alpine 3.18. Drop support for armhf.
 * **19.03.23:** - Add `pytz`.
 * **09.12.22:** - Rebase to Alpine 3.17.
