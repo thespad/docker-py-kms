@@ -27,7 +27,6 @@ The architectures supported by this image are:
 | :----: | :----: | ---- |
 | x86-64 | ✅ | latest |
 | arm64 | ✅ | latest |
-| armhf | ❌ | latest |
 
 ## Application Setup
 
@@ -112,6 +111,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 
 ## Versions
 
+* **30.12.23:** - Rebase to Alpine 3.19.
 * **29.10.23:** - Provide IPv4-only option for legacy hosts.
 * **14.05.23:** - Rebase to Alpine 3.18. Drop support for armhf.
 * **19.03.23:** - Add `pytz`.
