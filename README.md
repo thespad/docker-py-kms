@@ -7,9 +7,9 @@
 [![GitHub Stars](https://img.shields.io/github/stars/thespad/docker-py-kms.svg?color=26689A&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/thespad/docker-py-kms)
 [![Docker Stars](https://img.shields.io/docker/stars/thespad/py-kms.svg?color=26689A&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/thespad/py-kms)
 
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-py-kms/call-check-and-release.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Upstream%20Updates)](https://github.com/thespad/docker-py-kms/actions/workflows/call-check-and-release.yml)
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-py-kms/call-baseimage-update.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Baseimage%20Updates)](https://github.com/thespad/docker-py-kms/actions/workflows/call-baseimage-update.yml)
-[![ci](https://img.shields.io/github/actions/workflow/status/thespad/docker-py-kms/call-build-image.yml?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-py-kms/actions/workflows/call-build-image.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-py-kms/call-check-and-release.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Upstream%20Updates)](https://github.com/thespad/docker-py-kms/actions/workflows/call-check-and-release.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-py-kms/call-baseimage-update.yml?branch=main&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Check%20For%20Baseimage%20Updates)](https://github.com/thespad/docker-py-kms/actions/workflows/call-baseimage-update.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thespad/docker-py-kms/call-build-image.yml?labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github&label=Build%20Image)](https://github.com/thespad/docker-py-kms/actions/workflows/call-build-image.yml)
 
 [py-kms](https://github.com/Py-KMS-Organization/py-kms) is a port of node-kms created by cyrozap, which is a port of either the C#, C++, or .NET implementations of KMS Emulator. The original version was written by CODYQX4 and is derived from the reverse-engineered code of Microsoft's official KMS. This version of py-kms is itself a fork of the original implementation by SystemRage, which was abandoned early 2021.
 
@@ -42,7 +42,6 @@ Compatible with docker-compose v2 schemas.
 
 ```yaml
 ---
-version: "2.1"
 services:
   py-kms:
     image: ghcr.io/thespad/py-kms:latest
@@ -51,9 +50,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - LEGACY_NET= #optional
+      - IP=0.0.0.0 #optional
     volumes:
-      - /path/to/appdata/config:/config
+      - /path/to/py-kms/config:/config
     ports:
       - 1688:1688
     restart: unless-stopped
@@ -66,10 +65,10 @@ docker run -d \
   --name=py-kms \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e LEGACY_NET= `#optional` \
+  -e IP=0.0.0.0 `#optional` \
   -e TZ=Europe/London \
   -p 1688:1688 \
-  -v /path/to/appdata/config:/config \
+  -v /path/to/py-kms/config:/config \
   --restart unless-stopped \
   ghcr.io/thespad/py-kms:latest
 ```
@@ -84,7 +83,7 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
-| `-e LEGACY_NET=` | Set to `true` if you have an ancient host that can't support IPv6 dual stack. This will force py-kms to only bind to the IPv4 interface inside the container. |
+| `-e IP=` | IP address to bind to. Use `0.0.0.0` for all IPv4 interfaces, use `::` for all IPv6 interfaces, or specify a full address. Note that for compose you must quote the full variable, e.g. `- "IP=0.0.0.0"` or `- "IP=::"`. |
 | `-v /config` | Contains all relevant configuration files. |
 
 ## User / Group Identifiers
@@ -111,6 +110,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 
 ## Versions
 
+* **26.05.24:** - Rebase to Alpine 3.20.
 * **30.12.23:** - Rebase to Alpine 3.19.
 * **29.10.23:** - Provide IPv4-only option for legacy hosts.
 * **14.05.23:** - Rebase to Alpine 3.18. Drop support for armhf.
