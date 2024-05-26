@@ -50,7 +50,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - IP= #optional
+      - IP="::" #optional
     volumes:
       - /path/to/py-kms/config:/config
     ports:
@@ -65,7 +65,7 @@ docker run -d \
   --name=py-kms \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e IP= `#optional` \
+  -e IP="::" `#optional` \
   -e TZ=Europe/London \
   -p 1688:1688 \
   -v /path/to/py-kms/config:/config \
