@@ -50,7 +50,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - IP="::" #optional
+      - IP=0.0.0.0 #optional
     volumes:
       - /path/to/py-kms/config:/config
     ports:
@@ -65,7 +65,7 @@ docker run -d \
   --name=py-kms \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e IP="::" `#optional` \
+  -e IP=0.0.0.0 `#optional` \
   -e TZ=Europe/London \
   -p 1688:1688 \
   -v /path/to/py-kms/config:/config \
@@ -83,7 +83,7 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
-| `-e IP=` | IP address to bind to. Use `0.0.0.0` for all IPv4 interfaces. Defaults to `"::"` for all IPv6 & IPv4 interfaces. |
+| `-e IP=` | IP address to bind to. Use `0.0.0.0` for all IPv4 interfaces, use `::` for all IPv6 interfaces, or specify a full address. Note that for compose you must quote the full variable, e.g. `- "IP=0.0.0.0"` or `- "IP=::"`. |
 | `-v /config` | Contains all relevant configuration files. |
 
 ## User / Group Identifiers
