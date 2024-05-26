@@ -51,7 +51,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - LEGACY_NET= #optional
+      - IP= #optional
     volumes:
       - /path/to/appdata/config:/config
     ports:
@@ -66,7 +66,7 @@ docker run -d \
   --name=py-kms \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e LEGACY_NET= `#optional` \
+  -e IP= `#optional` \
   -e TZ=Europe/London \
   -p 1688:1688 \
   -v /path/to/appdata/config:/config \
@@ -84,7 +84,7 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London |
-| `-e LEGACY_NET=` | Set to `true` if you have an ancient host that can't support IPv6 dual stack. This will force py-kms to only bind to the IPv4 interface inside the container. |
+| `-e IP=` | IP address to bind to. Use `0.0.0.0` for all IPv4 interfaces. Defaults to `"::"` for all IPv6 & IPv4 interfaces. |
 | `-v /config` | Contains all relevant configuration files. |
 
 ## User / Group Identifiers
