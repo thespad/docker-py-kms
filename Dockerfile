@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/linuxserver/baseimage-alpine:3.19
 
 # set version label
 ARG BUILD_DATE
@@ -11,7 +11,6 @@ LABEL maintainer="thespad"
 LABEL org.opencontainers.image.source="https://github.com/thespad/docker-py-kms"
 LABEL org.opencontainers.image.url="https://github.com/thespad/docker-py-kms"
 LABEL org.opencontainers.image.description="A port of node-kms created by cyrozap, which is a port of either the C#, C++, or .NET implementations of KMS Emulator."
-LABEL org.opencontainers.image.authors="thespad"
 
 ENV PYTHONIOENCODING=utf-8 \
   VIRTUAL_ENV=/pyenv \
@@ -34,8 +33,7 @@ RUN \
     setuptools \
     wheel && \
   pip install -U --no-cache-dir pytz && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20 -r /home/py-kms/requirements.txt && \
-  printf "Version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
+  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19 -r /home/py-kms/requirements.txt && \
   apk del --purge \
     build-dependencies && \
   rm -rf \
