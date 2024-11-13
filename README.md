@@ -110,6 +110,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 
 ## Versions
 
+* **13.11.24:** - Revert to Alpine 3.19 & Python 3.11 to fix bug with Win 11 and Office activations.
 * **26.05.24:** - Rebase to Alpine 3.20.
 * **30.12.23:** - Rebase to Alpine 3.19.
 * **29.10.23:** - Provide IPv4-only option for legacy hosts.
