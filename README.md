@@ -32,13 +32,21 @@ The architectures supported by this image are:
 
 More info at [py-kms](https://github.com/Py-KMS-Organization/py-kms).
 
+## Read-Only Operation
+
+This image can be run with a read-only container filesystem.
+
+Running the container read-only requires mounting `/run` to tmpfs with the `exec` flag.
+
+## Non-Root Operation
+
+This image can be run with a non-root user.
+
 ## Usage
 
 Here are some example snippets to help you get started creating a container.
 
 ### docker-compose ([recommended](https://docs.linuxserver.io/general/docker-compose))
-
-Compatible with docker-compose v2 schemas.
 
 ```yaml
 ---
@@ -104,12 +112,55 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 * Shell access whilst the container is running: `docker exec -it py-kms /bin/bash`
 * To monitor the logs of the container in realtime: `docker logs -f py-kms`
 
+## Updating Info
+
+Most of our images are static, versioned, and require an image update and container recreation to update the app inside. We do not recommend or support updating apps inside the container. Please consult the [Application Setup](#application-setup) section above to see if it is recommended for the image.
+
+Below are the instructions for updating containers:
+
+### Via Docker Compose
+
+* Update all images: `docker-compose pull`
+  * or update a single image: `docker-compose pull py-kms`
+* Let compose update all containers as necessary: `docker-compose up -d`
+  * or update a single container: `docker-compose up -d py-kms`
+* You can also remove the old dangling images: `docker image prune`
+
+### Via Docker Run
+
+* Update the image: `docker pull ghcr.io/thespad/py-kms`
+* Stop the running container: `docker stop py-kms`
+* Delete the container: `docker rm py-kms`
+* Recreate a new container with the same docker run parameters as instructed above (if mapped correctly to a host folder, your `/config` folder and settings will be preserved)
+* You can also remove the old dangling images: `docker image prune`
+
 ### Image Update Notifications - Diun (Docker Image Update Notifier)
 
-* We recommend [Diun](https://crazymax.dev/diun/) for update notifications. Other tools that automatically update containers unattended are not recommended or supported.
+>[!TIP]
+>We recommend [Diun](https://crazymax.dev/diun/) for update notifications. Other tools that automatically update containers unattended are not recommended or supported.
+
+## Building locally
+
+If you want to make local modifications to these images for development purposes or just to customize the logic:
+
+```shell
+git clone https://github.com/thespad/docker-py-kms.git
+cd docker-py-kms
+docker build \
+  --no-cache \
+  --pull \
+  -t ghcr.io/thespad/py-kms:latest .
+```
+
+The arm variants can be built on x86_64 hardware and vice versa using `lscr.io/linuxserver/qemu-static`
+
+```bash
+docker run --rm --privileged lscr.io/linuxserver/qemu-static --reset
+```
 
 ## Versions
 
+* **02.02.25:** - Rebase to Alpine 3.21. Patch support for Python 3.21.
 * **13.11.24:** - Revert to Alpine 3.19 & Python 3.11 to fix bug with Win 11 and Office activations.
 * **26.05.24:** - Rebase to Alpine 3.20.
 * **30.12.23:** - Rebase to Alpine 3.19.
