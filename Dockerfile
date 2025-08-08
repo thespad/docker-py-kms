@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
 ARG BUILD_DATE
@@ -34,7 +34,7 @@ RUN --mount=type=bind,source=/patch,target=/patch \
     setuptools \
     wheel && \
   pip install -U --no-cache-dir pytz && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21 -r /home/py-kms/requirements.txt && \
+  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.22 -r /home/py-kms/requirements.txt && \
   patch /home/py-kms/pykms_PidGenerator.py < /patch/pykms_PidGenerator.patch && \
   patch /home/py-kms/KmsDataBase.xml < /patch/KmsDataBase.patch && \
   printf "Version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
