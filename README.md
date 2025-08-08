@@ -160,7 +160,7 @@ docker run --rm --privileged lscr.io/linuxserver/qemu-static --reset
 
 ## Versions
 
-* **02.02.25:** - Rebase to Alpine 3.22.
+* **02.08.25:** - Rebase to Alpine 3.22.
 * **02.02.25:** - Rebase to Alpine 3.21. Patch support for Python 3.12.
 * **13.11.24:** - Revert to Alpine 3.19 & Python 3.11 to fix bug with Win 11 and Office activations.
 * **26.05.24:** - Rebase to Alpine 3.20.
