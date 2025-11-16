@@ -31,9 +31,7 @@ RUN \
   python3 -m venv /pyenv && \
   pip install -U --no-cache-dir \
     pip \
-    setuptools \
     wheel && \
-  pip install -U --no-cache-dir pytz && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.22 -r /home/py-kms/requirements.txt && \
   printf "Version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   apk del --purge \
