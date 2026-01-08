@@ -160,6 +160,7 @@ docker run --rm --privileged lscr.io/linuxserver/qemu-static --reset
 
 ## Versions
 
+* **08.01.26:** - Make a pointless change for workflow testing purposes.
 * **08.01.26:** - Rebase to Alpine 3.23.
 * **17.11.25:** - Remove patch as upstream finally mereged Python 3.12 support.
 * **02.08.25:** - Rebase to Alpine 3.22.
