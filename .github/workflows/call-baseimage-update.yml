@@ -7,11 +7,11 @@ on:
 
 jobs:
   call-workflow:
-    uses: thespad/actions/.github/workflows/check-baseimage-update.yml@v9.0.4
+    uses: thespad/actions/.github/workflows/check-baseimage-update.yml@v9.0.5
     with:
       repo_owner: "thespad"
       baseimage: "alpine"
-      basebranch: "3.22"
+      basebranch: "3.23"
       app_name: "py-kms"
       branch_name: "main"
     secrets:
