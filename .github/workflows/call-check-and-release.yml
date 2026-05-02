@@ -12,7 +12,7 @@ jobs:
       repo_owner: "thespad"
       app_name: "py-kms"
       release_type: "github_commit"
-      release_url: "https://api.github.com/repos/Py-KMS-Organization/py-kms/commits/master"
+      release_url: "https://api.github.com/repos/Py-KMS-Organization/py-kms/commits/main"
       dockerhub_user: "thespad"
       branch_name: "main"
     secrets:
